@@ -1,0 +1,2106 @@
+
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R 是免費軟體，不提供任何擔保。
+在某些條件下您可以將其自由散布。
+用 'license()' 或 'licence()' 來獲得散布的詳細條件。
+
+R 是個合作計劃，有許多人為之做出了貢獻。
+用 'contributors()' 來看詳細的情況並且
+用 'citation()' 會告訴您如何在出版品中正確地參照 R 或 R 套件。
+
+用 'demo()' 來看一些示範程式，用 'help()' 來檢視線上輔助檔案，或
+用 'help.start()' 透過 HTML 瀏覽器來看輔助檔案。
+用 'q()' 離開 R。
+
+[Previously saved workspace restored]
+
+> rm(list=ls())
+> setwd("~/Dropbox/FCU/Teaching/Mentoring/2019Spring/ChihPingWang/EmpiricalMaincode/treetraitV2/sanchez.Lasker_coral/")
+> #setwd("~/Dropbox/ChihPingWang/EmpiricalMaincode/treetraitV2/sanchez.Lasker_coral/")
+> 
+> library(phangorn)
+Loading required package: ape
+> library(geiger)
+Registered S3 method overwritten by 'geiger':
+  method            from
+  unique.multiPhylo ape 
+> library(moments)
+> 
+> tree<-read.tree("tree.phy")
+> tree<-reorder(tree,"postorder")
+> tree$root.edge<-0
+> 
+> dataset <- read.csv(file="trait.csv")
+> 
+> ###thickness
+> resptrait<-dataset$thickness
+> names(resptrait)<-tree$tip.label
+> predtrait1<-dataset$distance
+> names(predtrait1)<-tree$tip.label
+> predtrait2<-dataset$polyp
+> names(predtrait2)<-tree$tip.label
+> 
+> #source("~/Dropbox/ChihPingWang/EmpiricalMaincode/modelcodeV2/empirical_analysis.r")
+> source("~/Dropbox/FCU/Teaching/Mentoring/2019Spring/ChihPingWang/EmpiricalMaincode/modelcodeV2/empirical_analysis.r")
+Loading required package: abc
+Loading required package: abc.data
+Loading required package: nnet
+Loading required package: quantreg
+Loading required package: SparseM
+
+Attaching package: ‘SparseM’
+
+The following object is masked from ‘package:base’:
+
+    backsolve
+
+Loading required package: MASS
+Loading required package: locfit
+locfit 1.5-9.1 	 2013-03-22
+Package 'Sim.DiffProc', version 4.4
+browseVignettes('Sim.DiffProc') for more informations.
+
+Attaching package: ‘Sim.DiffProc’
+
+The following objects are masked from ‘package:moments’:
+
+    kurtosis, moment, skewness
+
+##
+## Markov Chain Monte Carlo Package (MCMCpack)
+## Copyright (C) 2003-2019 Andrew D. Martin, Kevin M. Quinn, and Jong Hee Park
+##
+## Support provided by the U.S. National Science Foundation
+## (Grants SES-0350646 and SES-0350613)
+##
+Loading required package: ade4
+Registered S3 method overwritten by 'spdep':
+  method   from
+  plot.mst ape 
+
+Attaching package: ‘phylobase’
+
+The following object is masked from ‘package:ape’:
+
+    edges
+
+Registered S3 method overwritten by 'phytools':
+  method    from
+  plot.gfit abc 
+[1] "oubmbm100"
+[1] "oubmbm200"
+[1] "oubmbm300"
+[1] "oubmbm400"
+[1] "oubmbm500"
+[1] "oubmbm600"
+[1] "oubmbm700"
+[1] "oubmbm800"
+[1] "oubmbm900"
+[1] "oubmbm1000"
+[1] "oubmbm1100"
+[1] "oubmbm1200"
+[1] "oubmbm1300"
+[1] "oubmbm1400"
+[1] "oubmbm1500"
+[1] "oubmbm1600"
+[1] "oubmbm1700"
+[1] "oubmbm1800"
+[1] "oubmbm1900"
+[1] "oubmbm2000"
+[1] "oubmbm2100"
+[1] "oubmbm2200"
+[1] "oubmbm2300"
+[1] "oubmbm2400"
+[1] "oubmbm2500"
+[1] "oubmbm2600"
+[1] "oubmbm2700"
+[1] "oubmbm2800"
+[1] "oubmbm2900"
+[1] "oubmbm3000"
+[1] "oubmbm3100"
+[1] "oubmbm3200"
+[1] "oubmbm3300"
+[1] "oubmbm3400"
+[1] "oubmbm3500"
+[1] "oubmbm3600"
+[1] "oubmbm3700"
+[1] "oubmbm3800"
+[1] "oubmbm3900"
+[1] "oubmbm4000"
+[1] "oubmbm4100"
+[1] "oubmbm4200"
+[1] "oubmbm4300"
+[1] "oubmbm4400"
+[1] "oubmbm4500"
+[1] "oubmbm4600"
+[1] "oubmbm4700"
+[1] "oubmbm4800"
+[1] "oubmbm4900"
+[1] "oubmbm5000"
+[1] "oubmbm5100"
+[1] "oubmbm5200"
+[1] "oubmbm5300"
+[1] "oubmbm5400"
+[1] "oubmbm5500"
+[1] "oubmbm5600"
+[1] "oubmbm5700"
+[1] "oubmbm5800"
+[1] "oubmbm5900"
+[1] "oubmbm6000"
+[1] "oubmbm6100"
+[1] "oubmbm6200"
+[1] "oubmbm6300"
+[1] "oubmbm6400"
+[1] "oubmbm6500"
+[1] "oubmbm6600"
+[1] "oubmbm6700"
+[1] "oubmbm6800"
+[1] "oubmbm6900"
+[1] "oubmbm7000"
+[1] "oubmbm7100"
+[1] "oubmbm7200"
+[1] "oubmbm7300"
+[1] "oubmbm7400"
+[1] "oubmbm7500"
+[1] "oubmbm7600"
+[1] "oubmbm7700"
+[1] "oubmbm7800"
+[1] "oubmbm7900"
+[1] "oubmbm8000"
+[1] "oubmbm8100"
+[1] "oubmbm8200"
+[1] "oubmbm8300"
+[1] "oubmbm8400"
+[1] "oubmbm8500"
+[1] "oubmbm8600"
+[1] "oubmbm8700"
+[1] "oubmbm8800"
+[1] "oubmbm8900"
+[1] "oubmbm9000"
+[1] "oubmbm9100"
+[1] "oubmbm9200"
+[1] "oubmbm9300"
+[1] "oubmbm9400"
+[1] "oubmbm9500"
+[1] "oubmbm9600"
+[1] "oubmbm9700"
+[1] "oubmbm9800"
+[1] "oubmbm9900"
+[1] "oubmbm10000"
+[1] "ououbm100"
+[1] "ououbm200"
+[1] "ououbm300"
+[1] "ououbm400"
+[1] "ououbm500"
+[1] "ououbm600"
+[1] "ououbm700"
+[1] "ououbm800"
+[1] "ououbm900"
+[1] "ououbm1000"
+[1] "ououbm1100"
+[1] "ououbm1200"
+[1] "ououbm1300"
+[1] "ououbm1400"
+[1] "ououbm1500"
+[1] "ououbm1600"
+[1] "ououbm1700"
+[1] "ououbm1800"
+[1] "ououbm1900"
+[1] "ououbm2000"
+[1] "ououbm2100"
+[1] "ououbm2200"
+[1] "ououbm2300"
+[1] "ououbm2400"
+[1] "ououbm2500"
+[1] "ououbm2600"
+[1] "ououbm2700"
+[1] "ououbm2800"
+[1] "ououbm2900"
+[1] "ououbm3000"
+[1] "ououbm3100"
+[1] "ououbm3200"
+[1] "ououbm3300"
+[1] "ououbm3400"
+[1] "ououbm3500"
+[1] "ououbm3600"
+[1] "ououbm3700"
+[1] "ououbm3800"
+[1] "ououbm3900"
+[1] "ououbm4000"
+[1] "ououbm4100"
+[1] "ououbm4200"
+[1] "ououbm4300"
+[1] "ououbm4400"
+[1] "ououbm4500"
+[1] "ououbm4600"
+[1] "ououbm4700"
+[1] "ououbm4800"
+[1] "ououbm4900"
+[1] "ououbm5000"
+[1] "ououbm5100"
+[1] "ououbm5200"
+[1] "ououbm5300"
+[1] "ououbm5400"
+[1] "ououbm5500"
+[1] "ououbm5600"
+[1] "ououbm5700"
+[1] "ououbm5800"
+[1] "ououbm5900"
+[1] "ououbm6000"
+[1] "ououbm6100"
+[1] "ououbm6200"
+[1] "ououbm6300"
+[1] "ououbm6400"
+[1] "ououbm6500"
+[1] "ououbm6600"
+[1] "ououbm6700"
+[1] "ououbm6800"
+[1] "ououbm6900"
+[1] "ououbm7000"
+[1] "ououbm7100"
+[1] "ououbm7200"
+[1] "ououbm7300"
+[1] "ououbm7400"
+[1] "ououbm7500"
+[1] "ououbm7600"
+[1] "ououbm7700"
+[1] "ououbm7800"
+[1] "ououbm7900"
+[1] "ououbm8000"
+[1] "ououbm8100"
+[1] "ououbm8200"
+[1] "ououbm8300"
+[1] "ououbm8400"
+[1] "ououbm8500"
+[1] "ououbm8600"
+[1] "ououbm8700"
+[1] "ououbm8800"
+[1] "ououbm8900"
+[1] "ououbm9000"
+[1] "ououbm9100"
+[1] "ououbm9200"
+[1] "ououbm9300"
+[1] "ououbm9400"
+[1] "ououbm9500"
+[1] "ououbm9600"
+[1] "ououbm9700"
+[1] "ououbm9800"
+[1] "ououbm9900"
+[1] "ououbm10000"
+[1] "oubmcir100"
+[1] "oubmcir200"
+[1] "oubmcir300"
+[1] "oubmcir400"
+[1] "oubmcir500"
+[1] "oubmcir600"
+[1] "oubmcir700"
+[1] "oubmcir800"
+[1] "oubmcir900"
+[1] "oubmcir1000"
+[1] "oubmcir1100"
+[1] "oubmcir1200"
+[1] "oubmcir1300"
+[1] "oubmcir1400"
+[1] "oubmcir1500"
+[1] "oubmcir1600"
+[1] "oubmcir1700"
+[1] "oubmcir1800"
+[1] "oubmcir1900"
+[1] "oubmcir2000"
+[1] "oubmcir2100"
+[1] "oubmcir2200"
+[1] "oubmcir2300"
+[1] "oubmcir2400"
+[1] "oubmcir2500"
+[1] "oubmcir2600"
+[1] "oubmcir2700"
+[1] "oubmcir2800"
+[1] "oubmcir2900"
+[1] "oubmcir3000"
+[1] "oubmcir3100"
+[1] "oubmcir3200"
+[1] "oubmcir3300"
+[1] "oubmcir3400"
+[1] "oubmcir3500"
+[1] "oubmcir3600"
+[1] "oubmcir3700"
+[1] "oubmcir3800"
+[1] "oubmcir3900"
+[1] "oubmcir4000"
+[1] "oubmcir4100"
+[1] "oubmcir4200"
+[1] "oubmcir4300"
+[1] "oubmcir4400"
+[1] "oubmcir4500"
+[1] "oubmcir4600"
+[1] "oubmcir4700"
+[1] "oubmcir4800"
+[1] "oubmcir4900"
+[1] "oubmcir5000"
+[1] "oubmcir5100"
+[1] "oubmcir5200"
+[1] "oubmcir5300"
+[1] "oubmcir5400"
+[1] "oubmcir5500"
+[1] "oubmcir5600"
+[1] "oubmcir5700"
+[1] "oubmcir5800"
+[1] "oubmcir5900"
+[1] "oubmcir6000"
+[1] "oubmcir6100"
+[1] "oubmcir6200"
+[1] "oubmcir6300"
+[1] "oubmcir6400"
+[1] "oubmcir6500"
+[1] "oubmcir6600"
+[1] "oubmcir6700"
+[1] "oubmcir6800"
+[1] "oubmcir6900"
+[1] "oubmcir7000"
+[1] "oubmcir7100"
+[1] "oubmcir7200"
+[1] "oubmcir7300"
+[1] "oubmcir7400"
+[1] "oubmcir7500"
+[1] "oubmcir7600"
+[1] "oubmcir7700"
+[1] "oubmcir7800"
+[1] "oubmcir7900"
+[1] "oubmcir8000"
+[1] "oubmcir8100"
+[1] "oubmcir8200"
+[1] "oubmcir8300"
+[1] "oubmcir8400"
+[1] "oubmcir8500"
+[1] "oubmcir8600"
+[1] "oubmcir8700"
+[1] "oubmcir8800"
+[1] "oubmcir8900"
+[1] "oubmcir9000"
+[1] "oubmcir9100"
+[1] "oubmcir9200"
+[1] "oubmcir9300"
+[1] "oubmcir9400"
+[1] "oubmcir9500"
+[1] "oubmcir9600"
+[1] "oubmcir9700"
+[1] "oubmcir9800"
+[1] "oubmcir9900"
+[1] "oubmcir10000"
+[1] "oubmcir100"
+[1] "oubmcir200"
+[1] "oubmcir300"
+[1] "oubmcir400"
+[1] "oubmcir500"
+[1] "oubmcir600"
+[1] "oubmcir700"
+[1] "oubmcir800"
+[1] "oubmcir900"
+[1] "oubmcir1000"
+[1] "oubmcir1100"
+[1] "oubmcir1200"
+[1] "oubmcir1300"
+[1] "oubmcir1400"
+[1] "oubmcir1500"
+[1] "oubmcir1600"
+[1] "oubmcir1700"
+[1] "oubmcir1800"
+[1] "oubmcir1900"
+[1] "oubmcir2000"
+[1] "oubmcir2100"
+[1] "oubmcir2200"
+[1] "oubmcir2300"
+[1] "oubmcir2400"
+[1] "oubmcir2500"
+[1] "oubmcir2600"
+[1] "oubmcir2700"
+[1] "oubmcir2800"
+[1] "oubmcir2900"
+[1] "oubmcir3000"
+[1] "oubmcir3100"
+[1] "oubmcir3200"
+[1] "oubmcir3300"
+[1] "oubmcir3400"
+[1] "oubmcir3500"
+[1] "oubmcir3600"
+[1] "oubmcir3700"
+[1] "oubmcir3800"
+[1] "oubmcir3900"
+[1] "oubmcir4000"
+[1] "oubmcir4100"
+[1] "oubmcir4200"
+[1] "oubmcir4300"
+[1] "oubmcir4400"
+[1] "oubmcir4500"
+[1] "oubmcir4600"
+[1] "oubmcir4700"
+[1] "oubmcir4800"
+[1] "oubmcir4900"
+[1] "oubmcir5000"
+[1] "oubmcir5100"
+[1] "oubmcir5200"
+[1] "oubmcir5300"
+[1] "oubmcir5400"
+[1] "oubmcir5500"
+[1] "oubmcir5600"
+[1] "oubmcir5700"
+[1] "oubmcir5800"
+[1] "oubmcir5900"
+[1] "oubmcir6000"
+[1] "oubmcir6100"
+[1] "oubmcir6200"
+[1] "oubmcir6300"
+[1] "oubmcir6400"
+[1] "oubmcir6500"
+[1] "oubmcir6600"
+[1] "oubmcir6700"
+[1] "oubmcir6800"
+[1] "oubmcir6900"
+[1] "oubmcir7000"
+[1] "oubmcir7100"
+[1] "oubmcir7200"
+[1] "oubmcir7300"
+[1] "oubmcir7400"
+[1] "oubmcir7500"
+[1] "oubmcir7600"
+[1] "oubmcir7700"
+[1] "oubmcir7800"
+[1] "oubmcir7900"
+[1] "oubmcir8000"
+[1] "oubmcir8100"
+[1] "oubmcir8200"
+[1] "oubmcir8300"
+[1] "oubmcir8400"
+[1] "oubmcir8500"
+[1] "oubmcir8600"
+[1] "oubmcir8700"
+[1] "oubmcir8800"
+[1] "oubmcir8900"
+[1] "oubmcir9000"
+[1] "oubmcir9100"
+[1] "oubmcir9200"
+[1] "oubmcir9300"
+[1] "oubmcir9400"
+[1] "oubmcir9500"
+[1] "oubmcir9600"
+[1] "oubmcir9700"
+[1] "oubmcir9800"
+[1] "oubmcir9900"
+[1] "oubmcir10000"
+Call: 
+postpr(target = raw.sum.stat, index = models, sumstat = full.sum.stat, 
+    tol = tol, method = "mnlogistic")
+Data:
+ postpr.out$values (8000 posterior samples)
+Models a priori:
+ oubmbm, oubmcir, ououbm, ououcir
+Models a posteriori:
+ oubmbm, oubmcir, ououbm, ououcir
+
+Proportion of accepted simulations (rejection):
+ oubmbm oubmcir  ououbm ououcir 
+ 0.2381  0.1099  0.4272  0.2248 
+
+Bayes factors:
+        oubmbm oubmcir ououbm ououcir
+oubmbm  1.0000  2.1672 0.5573  1.0595
+oubmcir 0.4614  1.0000 0.2572  0.4889
+ououbm  1.7942  3.8885 1.0000  1.9010
+ououcir 0.9438  2.0455 0.5260  1.0000
+
+
+Posterior model probabilities (mnlogistic):
+ oubmbm oubmcir  ououbm ououcir 
+ 0.0101  0.0008  0.9701  0.0191 
+
+Bayes factors:
+           oubmbm   oubmcir    ououbm   ououcir
+oubmbm     1.0000   12.9452    0.0104    0.5268
+oubmcir    0.0772    1.0000    0.0008    0.0407
+ououbm    96.4496 1248.5614    1.0000   50.8078
+ououcir    1.8983   24.5742    0.0197    1.0000
+
+$rejection
+$rejection$Prob
+  oubmbm  oubmcir   ououbm  ououcir 
+0.238125 0.109875 0.427250 0.224750 
+
+$rejection$BayesF
+           oubmbm   oubmcir    ououbm   ououcir
+oubmbm  1.0000000 2.1672355 0.5573435 1.0595106
+oubmcir 0.4614173 1.0000000 0.2571679 0.4888765
+ououbm  1.7942257 3.8885097 1.0000000 1.9010011
+ououcir 0.9438320 2.0455063 0.5260386 1.0000000
+
+
+$mnlogistic
+$mnlogistic$Prob
+     oubmbm     oubmcir      ououbm     ououcir 
+0.010057817 0.000776952 0.970072255 0.019092976 
+
+$mnlogistic$BayesF
+              oubmbm      oubmcir       ououbm      ououcir
+oubmbm  1.000000e+00 1.294522e+01 1.036811e-02 5.267810e-01
+oubmcir 7.724857e-02 1.000000e+00 8.009217e-04 4.069308e-02
+ououbm  9.644958e+01 1.248561e+03 1.000000e+00 5.080781e+01
+ououcir 1.898322e+00 2.457420e+01 1.968201e-02 1.000000e+00
+
+
+Warning messages:
+1: In geiger::fitContinuous(tree, trait, model = model) :
+  Parameter estimates appear at bounds:
+	alpha
+2: In geiger::fitContinuous(tree, trait, model = model) :
+  Parameter estimates appear at bounds:
+	alpha
+3: In geiger::fitContinuous(tree, trait, model = model) :
+  Parameter estimates appear at bounds:
+	alpha
+> save.image("sanchez.Lasker_coral_raw_thickness.RData")
+> 
+> ####distance
+> rm(list=ls())
+> 
+> tree<-read.tree("tree.phy")
+> tree<-reorder(tree,"postorder")
+> tree$root.edge<-0
+> 
+> dataset <- read.csv(file="trait.csv")
+> 
+> resptrait<-dataset$distance
+> names(resptrait)<-tree$tip.label
+> predtrait1<-dataset$thickness
+> names(predtrait1)<-tree$tip.label
+> predtrait2<-dataset$polyp
+> names(predtrait2)<-tree$tip.label
+> 
+> #source("~/Dropbox/ChihPingWang/EmpiricalMaincode/modelcodeV2/empirical_analysis.r")
+> source("~/Dropbox/FCU/Teaching/Mentoring/2019Spring/ChihPingWang/EmpiricalMaincode/modelcodeV2/empirical_analysis.r")
+[1] "oubmbm100"
+[1] "oubmbm200"
+[1] "oubmbm300"
+[1] "oubmbm400"
+[1] "oubmbm500"
+[1] "oubmbm600"
+[1] "oubmbm700"
+[1] "oubmbm800"
+[1] "oubmbm900"
+[1] "oubmbm1000"
+[1] "oubmbm1100"
+[1] "oubmbm1200"
+[1] "oubmbm1300"
+[1] "oubmbm1400"
+[1] "oubmbm1500"
+[1] "oubmbm1600"
+[1] "oubmbm1700"
+[1] "oubmbm1800"
+[1] "oubmbm1900"
+[1] "oubmbm2000"
+[1] "oubmbm2100"
+[1] "oubmbm2200"
+[1] "oubmbm2300"
+[1] "oubmbm2400"
+[1] "oubmbm2500"
+[1] "oubmbm2600"
+[1] "oubmbm2700"
+[1] "oubmbm2800"
+[1] "oubmbm2900"
+[1] "oubmbm3000"
+[1] "oubmbm3100"
+[1] "oubmbm3200"
+[1] "oubmbm3300"
+[1] "oubmbm3400"
+[1] "oubmbm3500"
+[1] "oubmbm3600"
+[1] "oubmbm3700"
+[1] "oubmbm3800"
+[1] "oubmbm3900"
+[1] "oubmbm4000"
+[1] "oubmbm4100"
+[1] "oubmbm4200"
+[1] "oubmbm4300"
+[1] "oubmbm4400"
+[1] "oubmbm4500"
+[1] "oubmbm4600"
+[1] "oubmbm4700"
+[1] "oubmbm4800"
+[1] "oubmbm4900"
+[1] "oubmbm5000"
+[1] "oubmbm5100"
+[1] "oubmbm5200"
+[1] "oubmbm5300"
+[1] "oubmbm5400"
+[1] "oubmbm5500"
+[1] "oubmbm5600"
+[1] "oubmbm5700"
+[1] "oubmbm5800"
+[1] "oubmbm5900"
+[1] "oubmbm6000"
+[1] "oubmbm6100"
+[1] "oubmbm6200"
+[1] "oubmbm6300"
+[1] "oubmbm6400"
+[1] "oubmbm6500"
+[1] "oubmbm6600"
+[1] "oubmbm6700"
+[1] "oubmbm6800"
+[1] "oubmbm6900"
+[1] "oubmbm7000"
+[1] "oubmbm7100"
+[1] "oubmbm7200"
+[1] "oubmbm7300"
+[1] "oubmbm7400"
+[1] "oubmbm7500"
+[1] "oubmbm7600"
+[1] "oubmbm7700"
+[1] "oubmbm7800"
+[1] "oubmbm7900"
+[1] "oubmbm8000"
+[1] "oubmbm8100"
+[1] "oubmbm8200"
+[1] "oubmbm8300"
+[1] "oubmbm8400"
+[1] "oubmbm8500"
+[1] "oubmbm8600"
+[1] "oubmbm8700"
+[1] "oubmbm8800"
+[1] "oubmbm8900"
+[1] "oubmbm9000"
+[1] "oubmbm9100"
+[1] "oubmbm9200"
+[1] "oubmbm9300"
+[1] "oubmbm9400"
+[1] "oubmbm9500"
+[1] "oubmbm9600"
+[1] "oubmbm9700"
+[1] "oubmbm9800"
+[1] "oubmbm9900"
+[1] "oubmbm10000"
+[1] "ououbm100"
+[1] "ououbm200"
+[1] "ououbm300"
+[1] "ououbm400"
+[1] "ououbm500"
+[1] "ououbm600"
+[1] "ououbm700"
+[1] "ououbm800"
+[1] "ououbm900"
+[1] "ououbm1000"
+[1] "ououbm1100"
+[1] "ououbm1200"
+[1] "ououbm1300"
+[1] "ououbm1400"
+[1] "ououbm1500"
+[1] "ououbm1600"
+[1] "ououbm1700"
+[1] "ououbm1800"
+[1] "ououbm1900"
+[1] "ououbm2000"
+[1] "ououbm2100"
+[1] "ououbm2200"
+[1] "ououbm2300"
+[1] "ououbm2400"
+[1] "ououbm2500"
+[1] "ououbm2600"
+[1] "ououbm2700"
+[1] "ououbm2800"
+[1] "ououbm2900"
+[1] "ououbm3000"
+[1] "ououbm3100"
+[1] "ououbm3200"
+[1] "ououbm3300"
+[1] "ououbm3400"
+[1] "ououbm3500"
+[1] "ououbm3600"
+[1] "ououbm3700"
+[1] "ououbm3800"
+[1] "ououbm3900"
+[1] "ououbm4000"
+[1] "ououbm4100"
+[1] "ououbm4200"
+[1] "ououbm4300"
+[1] "ououbm4400"
+[1] "ououbm4500"
+[1] "ououbm4600"
+[1] "ououbm4700"
+[1] "ououbm4800"
+[1] "ououbm4900"
+[1] "ououbm5000"
+[1] "ououbm5100"
+[1] "ououbm5200"
+[1] "ououbm5300"
+[1] "ououbm5400"
+[1] "ououbm5500"
+[1] "ououbm5600"
+[1] "ououbm5700"
+[1] "ououbm5800"
+[1] "ououbm5900"
+[1] "ououbm6000"
+[1] "ououbm6100"
+[1] "ououbm6200"
+[1] "ououbm6300"
+[1] "ououbm6400"
+[1] "ououbm6500"
+[1] "ououbm6600"
+[1] "ououbm6700"
+[1] "ououbm6800"
+[1] "ououbm6900"
+[1] "ououbm7000"
+[1] "ououbm7100"
+[1] "ououbm7200"
+[1] "ououbm7300"
+[1] "ououbm7400"
+[1] "ououbm7500"
+[1] "ououbm7600"
+[1] "ououbm7700"
+[1] "ououbm7800"
+[1] "ououbm7900"
+[1] "ououbm8000"
+[1] "ououbm8100"
+[1] "ououbm8200"
+[1] "ououbm8300"
+[1] "ououbm8400"
+[1] "ououbm8500"
+[1] "ououbm8600"
+[1] "ououbm8700"
+[1] "ououbm8800"
+[1] "ououbm8900"
+[1] "ououbm9000"
+[1] "ououbm9100"
+[1] "ououbm9200"
+[1] "ououbm9300"
+[1] "ououbm9400"
+[1] "ououbm9500"
+[1] "ououbm9600"
+[1] "ououbm9700"
+[1] "ououbm9800"
+[1] "ououbm9900"
+[1] "ououbm10000"
+[1] "oubmcir100"
+[1] "oubmcir200"
+[1] "oubmcir300"
+[1] "oubmcir400"
+[1] "oubmcir500"
+[1] "oubmcir600"
+[1] "oubmcir700"
+[1] "oubmcir800"
+[1] "oubmcir900"
+[1] "oubmcir1000"
+[1] "oubmcir1100"
+[1] "oubmcir1200"
+[1] "oubmcir1300"
+[1] "oubmcir1400"
+[1] "oubmcir1500"
+[1] "oubmcir1600"
+[1] "oubmcir1700"
+[1] "oubmcir1800"
+[1] "oubmcir1900"
+[1] "oubmcir2000"
+[1] "oubmcir2100"
+[1] "oubmcir2200"
+[1] "oubmcir2300"
+[1] "oubmcir2400"
+[1] "oubmcir2500"
+[1] "oubmcir2600"
+[1] "oubmcir2700"
+[1] "oubmcir2800"
+[1] "oubmcir2900"
+[1] "oubmcir3000"
+[1] "oubmcir3100"
+[1] "oubmcir3200"
+[1] "oubmcir3300"
+[1] "oubmcir3400"
+[1] "oubmcir3500"
+[1] "oubmcir3600"
+[1] "oubmcir3700"
+[1] "oubmcir3800"
+[1] "oubmcir3900"
+[1] "oubmcir4000"
+[1] "oubmcir4100"
+[1] "oubmcir4200"
+[1] "oubmcir4300"
+[1] "oubmcir4400"
+[1] "oubmcir4500"
+[1] "oubmcir4600"
+[1] "oubmcir4700"
+[1] "oubmcir4800"
+[1] "oubmcir4900"
+[1] "oubmcir5000"
+[1] "oubmcir5100"
+[1] "oubmcir5200"
+[1] "oubmcir5300"
+[1] "oubmcir5400"
+[1] "oubmcir5500"
+[1] "oubmcir5600"
+[1] "oubmcir5700"
+[1] "oubmcir5800"
+[1] "oubmcir5900"
+[1] "oubmcir6000"
+[1] "oubmcir6100"
+[1] "oubmcir6200"
+[1] "oubmcir6300"
+[1] "oubmcir6400"
+[1] "oubmcir6500"
+[1] "oubmcir6600"
+[1] "oubmcir6700"
+[1] "oubmcir6800"
+[1] "oubmcir6900"
+[1] "oubmcir7000"
+[1] "oubmcir7100"
+[1] "oubmcir7200"
+[1] "oubmcir7300"
+[1] "oubmcir7400"
+[1] "oubmcir7500"
+[1] "oubmcir7600"
+[1] "oubmcir7700"
+[1] "oubmcir7800"
+[1] "oubmcir7900"
+[1] "oubmcir8000"
+[1] "oubmcir8100"
+[1] "oubmcir8200"
+[1] "oubmcir8300"
+[1] "oubmcir8400"
+[1] "oubmcir8500"
+[1] "oubmcir8600"
+[1] "oubmcir8700"
+[1] "oubmcir8800"
+[1] "oubmcir8900"
+[1] "oubmcir9000"
+[1] "oubmcir9100"
+[1] "oubmcir9200"
+[1] "oubmcir9300"
+[1] "oubmcir9400"
+[1] "oubmcir9500"
+[1] "oubmcir9600"
+[1] "oubmcir9700"
+[1] "oubmcir9800"
+[1] "oubmcir9900"
+[1] "oubmcir10000"
+[1] "oubmcir100"
+[1] "oubmcir200"
+[1] "oubmcir300"
+[1] "oubmcir400"
+[1] "oubmcir500"
+[1] "oubmcir600"
+[1] "oubmcir700"
+[1] "oubmcir800"
+[1] "oubmcir900"
+[1] "oubmcir1000"
+[1] "oubmcir1100"
+[1] "oubmcir1200"
+[1] "oubmcir1300"
+[1] "oubmcir1400"
+[1] "oubmcir1500"
+[1] "oubmcir1600"
+[1] "oubmcir1700"
+[1] "oubmcir1800"
+[1] "oubmcir1900"
+[1] "oubmcir2000"
+[1] "oubmcir2100"
+[1] "oubmcir2200"
+[1] "oubmcir2300"
+[1] "oubmcir2400"
+[1] "oubmcir2500"
+[1] "oubmcir2600"
+[1] "oubmcir2700"
+[1] "oubmcir2800"
+[1] "oubmcir2900"
+[1] "oubmcir3000"
+[1] "oubmcir3100"
+[1] "oubmcir3200"
+[1] "oubmcir3300"
+[1] "oubmcir3400"
+[1] "oubmcir3500"
+[1] "oubmcir3600"
+[1] "oubmcir3700"
+[1] "oubmcir3800"
+[1] "oubmcir3900"
+[1] "oubmcir4000"
+[1] "oubmcir4100"
+[1] "oubmcir4200"
+[1] "oubmcir4300"
+[1] "oubmcir4400"
+[1] "oubmcir4500"
+[1] "oubmcir4600"
+[1] "oubmcir4700"
+[1] "oubmcir4800"
+[1] "oubmcir4900"
+[1] "oubmcir5000"
+[1] "oubmcir5100"
+[1] "oubmcir5200"
+[1] "oubmcir5300"
+[1] "oubmcir5400"
+[1] "oubmcir5500"
+[1] "oubmcir5600"
+[1] "oubmcir5700"
+[1] "oubmcir5800"
+[1] "oubmcir5900"
+[1] "oubmcir6000"
+[1] "oubmcir6100"
+[1] "oubmcir6200"
+[1] "oubmcir6300"
+[1] "oubmcir6400"
+[1] "oubmcir6500"
+[1] "oubmcir6600"
+[1] "oubmcir6700"
+[1] "oubmcir6800"
+[1] "oubmcir6900"
+[1] "oubmcir7000"
+[1] "oubmcir7100"
+[1] "oubmcir7200"
+[1] "oubmcir7300"
+[1] "oubmcir7400"
+[1] "oubmcir7500"
+[1] "oubmcir7600"
+[1] "oubmcir7700"
+[1] "oubmcir7800"
+[1] "oubmcir7900"
+[1] "oubmcir8000"
+[1] "oubmcir8100"
+[1] "oubmcir8200"
+[1] "oubmcir8300"
+[1] "oubmcir8400"
+[1] "oubmcir8500"
+[1] "oubmcir8600"
+[1] "oubmcir8700"
+[1] "oubmcir8800"
+[1] "oubmcir8900"
+[1] "oubmcir9000"
+[1] "oubmcir9100"
+[1] "oubmcir9200"
+[1] "oubmcir9300"
+[1] "oubmcir9400"
+[1] "oubmcir9500"
+[1] "oubmcir9600"
+[1] "oubmcir9700"
+[1] "oubmcir9800"
+[1] "oubmcir9900"
+[1] "oubmcir10000"
+Call: 
+postpr(target = raw.sum.stat, index = models, sumstat = full.sum.stat, 
+    tol = tol, method = "mnlogistic")
+Data:
+ postpr.out$values (8000 posterior samples)
+Models a priori:
+ oubmbm, oubmcir, ououbm, ououcir
+Models a posteriori:
+ oubmbm, oubmcir, ououbm, ououcir
+
+Proportion of accepted simulations (rejection):
+ oubmbm oubmcir  ououbm ououcir 
+ 0.1724  0.1610  0.3276  0.3390 
+
+Bayes factors:
+        oubmbm oubmcir ououbm ououcir
+oubmbm  1.0000  1.0707 0.5261  0.5085
+oubmcir 0.9340  1.0000 0.4914  0.4749
+ououbm  1.9007  2.0349 1.0000  0.9664
+ououcir 1.9666  2.1056 1.0347  1.0000
+
+
+Posterior model probabilities (mnlogistic):
+ oubmbm oubmcir  ououbm ououcir 
+ 0.0026  0.0022  0.6833  0.3120 
+
+Bayes factors:
+          oubmbm  oubmcir   ououbm  ououcir
+oubmbm    1.0000   1.1973   0.0038   0.0083
+oubmcir   0.8352   1.0000   0.0032   0.0069
+ououbm  264.4774 316.6617   1.0000   2.1900
+ououcir 120.7659 144.5943   0.4566   1.0000
+
+$rejection
+$rejection$Prob
+  oubmbm  oubmcir   ououbm  ououcir 
+0.172375 0.161000 0.327625 0.339000 
+
+$rejection$BayesF
+           oubmbm   oubmcir    ououbm   ououcir
+oubmbm  1.0000000 1.0706522 0.5261351 0.5084808
+oubmcir 0.9340102 1.0000000 0.4914155 0.4749263
+ououbm  1.9006526 2.0349379 1.0000000 0.9664454
+ououcir 1.9666425 2.1055901 1.0347196 1.0000000
+
+
+$mnlogistic
+$mnlogistic$Prob
+     oubmbm     oubmcir      ououbm     ououcir 
+0.002583455 0.002157715 0.683265525 0.311993306 
+
+$mnlogistic$BayesF
+              oubmbm      oubmcir       ououbm      ououcir
+oubmbm  1.000000e+00 1.197311e+00 3.781041e-03 8.280482e-03
+oubmcir 8.352050e-01 1.000000e+00 3.157944e-03 6.915900e-03
+ououbm  2.644774e+02 3.166617e+02 1.000000e+00 2.190001e+00
+ououcir 1.207659e+02 1.445943e+02 4.566209e-01 1.000000e+00
+
+
+Warning messages:
+1: In geiger::fitContinuous(tree, trait, model = model) :
+  Parameter estimates appear at bounds:
+	alpha
+2: In geiger::fitContinuous(tree, trait, model = model) :
+  Parameter estimates appear at bounds:
+	alpha
+3: In geiger::fitContinuous(tree, trait, model = model) :
+  Parameter estimates appear at bounds:
+	alpha
+> save.image("sanchez.Lasker_coral_raw_distance.RData")
+> 
+> 
+> ### polyp
+> rm(list=ls())
+> 
+> tree<-read.tree("tree.phy")
+> tree<-reorder(tree,"postorder")
+> tree$root.edge<-0
+> 
+> dataset <- read.csv(file="trait.csv")
+> 
+> resptrait<-dataset$polyp
+> names(resptrait)<-tree$tip.label
+> predtrait1<-dataset$thickness
+> names(predtrait1)<-tree$tip.label
+> predtrait2<-dataset$distance
+> names(predtrait2)<-tree$tip.label
+> 
+> #source("~/Dropbox/ChihPingWang/EmpiricalMaincode/modelcodeV2/empirical_analysis.r")
+> source("~/Dropbox/FCU/Teaching/Mentoring/2019Spring/ChihPingWang/EmpiricalMaincode/modelcodeV2/empirical_analysis.r")
+[1] "oubmbm100"
+[1] "oubmbm200"
+[1] "oubmbm300"
+[1] "oubmbm400"
+[1] "oubmbm500"
+[1] "oubmbm600"
+[1] "oubmbm700"
+[1] "oubmbm800"
+[1] "oubmbm900"
+[1] "oubmbm1000"
+[1] "oubmbm1100"
+[1] "oubmbm1200"
+[1] "oubmbm1300"
+[1] "oubmbm1400"
+[1] "oubmbm1500"
+[1] "oubmbm1600"
+[1] "oubmbm1700"
+[1] "oubmbm1800"
+[1] "oubmbm1900"
+[1] "oubmbm2000"
+[1] "oubmbm2100"
+[1] "oubmbm2200"
+[1] "oubmbm2300"
+[1] "oubmbm2400"
+[1] "oubmbm2500"
+[1] "oubmbm2600"
+[1] "oubmbm2700"
+[1] "oubmbm2800"
+[1] "oubmbm2900"
+[1] "oubmbm3000"
+[1] "oubmbm3100"
+[1] "oubmbm3200"
+[1] "oubmbm3300"
+[1] "oubmbm3400"
+[1] "oubmbm3500"
+[1] "oubmbm3600"
+[1] "oubmbm3700"
+[1] "oubmbm3800"
+[1] "oubmbm3900"
+[1] "oubmbm4000"
+[1] "oubmbm4100"
+[1] "oubmbm4200"
+[1] "oubmbm4300"
+[1] "oubmbm4400"
+[1] "oubmbm4500"
+[1] "oubmbm4600"
+[1] "oubmbm4700"
+[1] "oubmbm4800"
+[1] "oubmbm4900"
+[1] "oubmbm5000"
+[1] "oubmbm5100"
+[1] "oubmbm5200"
+[1] "oubmbm5300"
+[1] "oubmbm5400"
+[1] "oubmbm5500"
+[1] "oubmbm5600"
+[1] "oubmbm5700"
+[1] "oubmbm5800"
+[1] "oubmbm5900"
+[1] "oubmbm6000"
+[1] "oubmbm6100"
+[1] "oubmbm6200"
+[1] "oubmbm6300"
+[1] "oubmbm6400"
+[1] "oubmbm6500"
+[1] "oubmbm6600"
+[1] "oubmbm6700"
+[1] "oubmbm6800"
+[1] "oubmbm6900"
+[1] "oubmbm7000"
+[1] "oubmbm7100"
+[1] "oubmbm7200"
+[1] "oubmbm7300"
+[1] "oubmbm7400"
+[1] "oubmbm7500"
+[1] "oubmbm7600"
+[1] "oubmbm7700"
+[1] "oubmbm7800"
+[1] "oubmbm7900"
+[1] "oubmbm8000"
+[1] "oubmbm8100"
+[1] "oubmbm8200"
+[1] "oubmbm8300"
+[1] "oubmbm8400"
+[1] "oubmbm8500"
+[1] "oubmbm8600"
+[1] "oubmbm8700"
+[1] "oubmbm8800"
+[1] "oubmbm8900"
+[1] "oubmbm9000"
+[1] "oubmbm9100"
+[1] "oubmbm9200"
+[1] "oubmbm9300"
+[1] "oubmbm9400"
+[1] "oubmbm9500"
+[1] "oubmbm9600"
+[1] "oubmbm9700"
+[1] "oubmbm9800"
+[1] "oubmbm9900"
+[1] "oubmbm10000"
+[1] "ououbm100"
+[1] "ououbm200"
+[1] "ououbm300"
+[1] "ououbm400"
+[1] "ououbm500"
+[1] "ououbm600"
+[1] "ououbm700"
+[1] "ououbm800"
+[1] "ououbm900"
+[1] "ououbm1000"
+[1] "ououbm1100"
+[1] "ououbm1200"
+[1] "ououbm1300"
+[1] "ououbm1400"
+[1] "ououbm1500"
+[1] "ououbm1600"
+[1] "ououbm1700"
+[1] "ououbm1800"
+[1] "ououbm1900"
+[1] "ououbm2000"
+[1] "ououbm2100"
+[1] "ououbm2200"
+[1] "ououbm2300"
+[1] "ououbm2400"
+[1] "ououbm2500"
+[1] "ououbm2600"
+[1] "ououbm2700"
+[1] "ououbm2800"
+[1] "ououbm2900"
+[1] "ououbm3000"
+[1] "ououbm3100"
+[1] "ououbm3200"
+[1] "ououbm3300"
+[1] "ououbm3400"
+[1] "ououbm3500"
+[1] "ououbm3600"
+[1] "ououbm3700"
+[1] "ououbm3800"
+[1] "ououbm3900"
+[1] "ououbm4000"
+[1] "ououbm4100"
+[1] "ououbm4200"
+[1] "ououbm4300"
+[1] "ououbm4400"
+[1] "ououbm4500"
+[1] "ououbm4600"
+[1] "ououbm4700"
+[1] "ououbm4800"
+[1] "ououbm4900"
+[1] "ououbm5000"
+[1] "ououbm5100"
+[1] "ououbm5200"
+[1] "ououbm5300"
+[1] "ououbm5400"
+[1] "ououbm5500"
+[1] "ououbm5600"
+[1] "ououbm5700"
+[1] "ououbm5800"
+[1] "ououbm5900"
+[1] "ououbm6000"
+[1] "ououbm6100"
+[1] "ououbm6200"
+[1] "ououbm6300"
+[1] "ououbm6400"
+[1] "ououbm6500"
+[1] "ououbm6600"
+[1] "ououbm6700"
+[1] "ououbm6800"
+[1] "ououbm6900"
+[1] "ououbm7000"
+[1] "ououbm7100"
+[1] "ououbm7200"
+[1] "ououbm7300"
+[1] "ououbm7400"
+[1] "ououbm7500"
+[1] "ououbm7600"
+[1] "ououbm7700"
+[1] "ououbm7800"
+[1] "ououbm7900"
+[1] "ououbm8000"
+[1] "ououbm8100"
+[1] "ououbm8200"
+[1] "ououbm8300"
+[1] "ououbm8400"
+[1] "ououbm8500"
+[1] "ououbm8600"
+[1] "ououbm8700"
+[1] "ououbm8800"
+[1] "ououbm8900"
+[1] "ououbm9000"
+[1] "ououbm9100"
+[1] "ououbm9200"
+[1] "ououbm9300"
+[1] "ououbm9400"
+[1] "ououbm9500"
+[1] "ououbm9600"
+[1] "ououbm9700"
+[1] "ououbm9800"
+[1] "ououbm9900"
+[1] "ououbm10000"
+[1] "oubmcir100"
+[1] "oubmcir200"
+[1] "oubmcir300"
+[1] "oubmcir400"
+[1] "oubmcir500"
+[1] "oubmcir600"
+[1] "oubmcir700"
+[1] "oubmcir800"
+[1] "oubmcir900"
+[1] "oubmcir1000"
+[1] "oubmcir1100"
+[1] "oubmcir1200"
+[1] "oubmcir1300"
+[1] "oubmcir1400"
+[1] "oubmcir1500"
+[1] "oubmcir1600"
+[1] "oubmcir1700"
+[1] "oubmcir1800"
+[1] "oubmcir1900"
+[1] "oubmcir2000"
+[1] "oubmcir2100"
+[1] "oubmcir2200"
+[1] "oubmcir2300"
+[1] "oubmcir2400"
+[1] "oubmcir2500"
+[1] "oubmcir2600"
+[1] "oubmcir2700"
+[1] "oubmcir2800"
+[1] "oubmcir2900"
+[1] "oubmcir3000"
+[1] "oubmcir3100"
+[1] "oubmcir3200"
+[1] "oubmcir3300"
+[1] "oubmcir3400"
+[1] "oubmcir3500"
+[1] "oubmcir3600"
+[1] "oubmcir3700"
+[1] "oubmcir3800"
+[1] "oubmcir3900"
+[1] "oubmcir4000"
+[1] "oubmcir4100"
+[1] "oubmcir4200"
+[1] "oubmcir4300"
+[1] "oubmcir4400"
+[1] "oubmcir4500"
+[1] "oubmcir4600"
+[1] "oubmcir4700"
+[1] "oubmcir4800"
+[1] "oubmcir4900"
+[1] "oubmcir5000"
+[1] "oubmcir5100"
+[1] "oubmcir5200"
+[1] "oubmcir5300"
+[1] "oubmcir5400"
+[1] "oubmcir5500"
+[1] "oubmcir5600"
+[1] "oubmcir5700"
+[1] "oubmcir5800"
+[1] "oubmcir5900"
+[1] "oubmcir6000"
+[1] "oubmcir6100"
+[1] "oubmcir6200"
+[1] "oubmcir6300"
+[1] "oubmcir6400"
+[1] "oubmcir6500"
+[1] "oubmcir6600"
+[1] "oubmcir6700"
+[1] "oubmcir6800"
+[1] "oubmcir6900"
+[1] "oubmcir7000"
+[1] "oubmcir7100"
+[1] "oubmcir7200"
+[1] "oubmcir7300"
+[1] "oubmcir7400"
+[1] "oubmcir7500"
+[1] "oubmcir7600"
+[1] "oubmcir7700"
+[1] "oubmcir7800"
+[1] "oubmcir7900"
+[1] "oubmcir8000"
+[1] "oubmcir8100"
+[1] "oubmcir8200"
+[1] "oubmcir8300"
+[1] "oubmcir8400"
+[1] "oubmcir8500"
+[1] "oubmcir8600"
+[1] "oubmcir8700"
+[1] "oubmcir8800"
+[1] "oubmcir8900"
+[1] "oubmcir9000"
+[1] "oubmcir9100"
+[1] "oubmcir9200"
+[1] "oubmcir9300"
+[1] "oubmcir9400"
+[1] "oubmcir9500"
+[1] "oubmcir9600"
+[1] "oubmcir9700"
+[1] "oubmcir9800"
+[1] "oubmcir9900"
+[1] "oubmcir10000"
+[1] "oubmcir100"
+[1] "oubmcir200"
+[1] "oubmcir300"
+[1] "oubmcir400"
+[1] "oubmcir500"
+[1] "oubmcir600"
+[1] "oubmcir700"
+[1] "oubmcir800"
+[1] "oubmcir900"
+[1] "oubmcir1000"
+[1] "oubmcir1100"
+[1] "oubmcir1200"
+[1] "oubmcir1300"
+[1] "oubmcir1400"
+[1] "oubmcir1500"
+[1] "oubmcir1600"
+[1] "oubmcir1700"
+[1] "oubmcir1800"
+[1] "oubmcir1900"
+[1] "oubmcir2000"
+[1] "oubmcir2100"
+[1] "oubmcir2200"
+[1] "oubmcir2300"
+[1] "oubmcir2400"
+[1] "oubmcir2500"
+[1] "oubmcir2600"
+[1] "oubmcir2700"
+[1] "oubmcir2800"
+[1] "oubmcir2900"
+[1] "oubmcir3000"
+[1] "oubmcir3100"
+[1] "oubmcir3200"
+[1] "oubmcir3300"
+[1] "oubmcir3400"
+[1] "oubmcir3500"
+[1] "oubmcir3600"
+[1] "oubmcir3700"
+[1] "oubmcir3800"
+[1] "oubmcir3900"
+[1] "oubmcir4000"
+[1] "oubmcir4100"
+[1] "oubmcir4200"
+[1] "oubmcir4300"
+[1] "oubmcir4400"
+[1] "oubmcir4500"
+[1] "oubmcir4600"
+[1] "oubmcir4700"
+[1] "oubmcir4800"
+[1] "oubmcir4900"
+[1] "oubmcir5000"
+[1] "oubmcir5100"
+[1] "oubmcir5200"
+[1] "oubmcir5300"
+[1] "oubmcir5400"
+[1] "oubmcir5500"
+[1] "oubmcir5600"
+[1] "oubmcir5700"
+[1] "oubmcir5800"
+[1] "oubmcir5900"
+[1] "oubmcir6000"
+[1] "oubmcir6100"
+[1] "oubmcir6200"
+[1] "oubmcir6300"
+[1] "oubmcir6400"
+[1] "oubmcir6500"
+[1] "oubmcir6600"
+[1] "oubmcir6700"
+[1] "oubmcir6800"
+[1] "oubmcir6900"
+[1] "oubmcir7000"
+[1] "oubmcir7100"
+[1] "oubmcir7200"
+[1] "oubmcir7300"
+[1] "oubmcir7400"
+[1] "oubmcir7500"
+[1] "oubmcir7600"
+[1] "oubmcir7700"
+[1] "oubmcir7800"
+[1] "oubmcir7900"
+[1] "oubmcir8000"
+[1] "oubmcir8100"
+[1] "oubmcir8200"
+[1] "oubmcir8300"
+[1] "oubmcir8400"
+[1] "oubmcir8500"
+[1] "oubmcir8600"
+[1] "oubmcir8700"
+[1] "oubmcir8800"
+[1] "oubmcir8900"
+[1] "oubmcir9000"
+[1] "oubmcir9100"
+[1] "oubmcir9200"
+[1] "oubmcir9300"
+[1] "oubmcir9400"
+[1] "oubmcir9500"
+[1] "oubmcir9600"
+[1] "oubmcir9700"
+[1] "oubmcir9800"
+[1] "oubmcir9900"
+[1] "oubmcir10000"
+Call: 
+postpr(target = raw.sum.stat, index = models, sumstat = full.sum.stat, 
+    tol = tol, method = "mnlogistic")
+Data:
+ postpr.out$values (8000 posterior samples)
+Models a priori:
+ oubmbm, oubmcir, ououbm, ououcir
+Models a posteriori:
+ oubmbm, oubmcir, ououbm, ououcir
+
+Proportion of accepted simulations (rejection):
+ oubmbm oubmcir  ououbm ououcir 
+ 0.2304  0.2226  0.2251  0.3219 
+
+Bayes factors:
+        oubmbm oubmcir ououbm ououcir
+oubmbm  1.0000  1.0348 1.0233  0.7157
+oubmcir 0.9664  1.0000 0.9889  0.6917
+ououbm  0.9772  1.0112 1.0000  0.6994
+ououcir 1.3972  1.4458 1.4298  1.0000
+
+
+Posterior model probabilities (mnlogistic):
+ oubmbm oubmcir  ououbm ououcir 
+ 0.0030  0.0024  0.2956  0.6989 
+
+Bayes factors:
+          oubmbm  oubmcir   ououbm  ououcir
+oubmbm    1.0000   1.2382   0.0102   0.0043
+oubmcir   0.8077   1.0000   0.0083   0.0035
+ououbm   97.6148 120.8623   1.0000   0.4229
+ououcir 230.7981 285.7639   2.3644   1.0000
+
+$rejection
+$rejection$Prob
+  oubmbm  oubmcir   ououbm  ououcir 
+0.230375 0.222625 0.225125 0.321875 
+
+$rejection$BayesF
+           oubmbm   oubmcir    ououbm   ououcir
+oubmbm  1.0000000 1.0348119 1.0233204 0.7157282
+oubmcir 0.9663592 1.0000000 0.9888951 0.6916505
+ououbm  0.9772111 1.0112296 1.0000000 0.6994175
+ououcir 1.3971785 1.4458170 1.4297612 1.0000000
+
+
+$mnlogistic
+$mnlogistic$Prob
+     oubmbm     oubmcir      ououbm     ououcir 
+0.003028279 0.002445799 0.295604891 0.698921031 
+
+$mnlogistic$BayesF
+              oubmbm      oubmcir       ououbm      ououcir
+oubmbm  1.000000e+00 1.238155e+00 1.024435e-02 4.332792e-03
+oubmcir 8.076531e-01 1.000000e+00 8.273878e-03 3.499392e-03
+ououbm  9.761481e+01 1.208623e+02 1.000000e+00 4.229446e-01
+ououcir 2.307981e+02 2.857639e+02 2.364376e+00 1.000000e+00
+
+
+Warning messages:
+1: In geiger::fitContinuous(tree, trait, model = model) :
+  Parameter estimates appear at bounds:
+	alpha
+2: In geiger::fitContinuous(tree, trait, model = model) :
+  Parameter estimates appear at bounds:
+	alpha
+3: In geiger::fitContinuous(tree, trait, model = model) :
+  Parameter estimates appear at bounds:
+	alpha
+> save.image("sanchez.Lasker_coral_raw_polyp.RData")
+> 
+> 
+> ###
+> ### log data
+> ###
+> rm(list=ls())
+> tree<-read.tree("tree.phy")
+> tree<-reorder(tree,"postorder")
+> tree$root.edge<-0
+> 
+> dataset <- read.csv(file="trait.csv")
+> 
+> ###thickness
+> resptrait<-log(dataset$thickness)
+> names(resptrait)<-tree$tip.label
+> predtrait1<-log(dataset$distance)
+> names(predtrait1)<-tree$tip.label
+> predtrait2<-log(dataset$polyp)
+> names(predtrait2)<-tree$tip.label
+> 
+> #source("~/Dropbox/ChihPingWang/EmpiricalMaincode/modelcodeV2/empirical_analysis.r")
+> source("~/Dropbox/FCU/Teaching/Mentoring/2019Spring/ChihPingWang/EmpiricalMaincode/modelcodeV2/empirical_analysis.r")
+[1] "oubmbm100"
+[1] "oubmbm200"
+[1] "oubmbm300"
+[1] "oubmbm400"
+[1] "oubmbm500"
+[1] "oubmbm600"
+[1] "oubmbm700"
+[1] "oubmbm800"
+[1] "oubmbm900"
+[1] "oubmbm1000"
+[1] "oubmbm1100"
+[1] "oubmbm1200"
+[1] "oubmbm1300"
+[1] "oubmbm1400"
+[1] "oubmbm1500"
+[1] "oubmbm1600"
+[1] "oubmbm1700"
+[1] "oubmbm1800"
+[1] "oubmbm1900"
+[1] "oubmbm2000"
+[1] "oubmbm2100"
+[1] "oubmbm2200"
+[1] "oubmbm2300"
+[1] "oubmbm2400"
+[1] "oubmbm2500"
+[1] "oubmbm2600"
+[1] "oubmbm2700"
+[1] "oubmbm2800"
+[1] "oubmbm2900"
+[1] "oubmbm3000"
+[1] "oubmbm3100"
+[1] "oubmbm3200"
+[1] "oubmbm3300"
+[1] "oubmbm3400"
+[1] "oubmbm3500"
+[1] "oubmbm3600"
+[1] "oubmbm3700"
+[1] "oubmbm3800"
+[1] "oubmbm3900"
+[1] "oubmbm4000"
+[1] "oubmbm4100"
+[1] "oubmbm4200"
+[1] "oubmbm4300"
+[1] "oubmbm4400"
+[1] "oubmbm4500"
+[1] "oubmbm4600"
+[1] "oubmbm4700"
+[1] "oubmbm4800"
+[1] "oubmbm4900"
+[1] "oubmbm5000"
+[1] "oubmbm5100"
+[1] "oubmbm5200"
+[1] "oubmbm5300"
+[1] "oubmbm5400"
+[1] "oubmbm5500"
+[1] "oubmbm5600"
+[1] "oubmbm5700"
+[1] "oubmbm5800"
+[1] "oubmbm5900"
+[1] "oubmbm6000"
+[1] "oubmbm6100"
+[1] "oubmbm6200"
+[1] "oubmbm6300"
+[1] "oubmbm6400"
+[1] "oubmbm6500"
+[1] "oubmbm6600"
+[1] "oubmbm6700"
+[1] "oubmbm6800"
+[1] "oubmbm6900"
+[1] "oubmbm7000"
+[1] "oubmbm7100"
+[1] "oubmbm7200"
+[1] "oubmbm7300"
+[1] "oubmbm7400"
+[1] "oubmbm7500"
+[1] "oubmbm7600"
+[1] "oubmbm7700"
+[1] "oubmbm7800"
+[1] "oubmbm7900"
+[1] "oubmbm8000"
+[1] "oubmbm8100"
+[1] "oubmbm8200"
+[1] "oubmbm8300"
+[1] "oubmbm8400"
+[1] "oubmbm8500"
+[1] "oubmbm8600"
+[1] "oubmbm8700"
+[1] "oubmbm8800"
+[1] "oubmbm8900"
+[1] "oubmbm9000"
+[1] "oubmbm9100"
+[1] "oubmbm9200"
+[1] "oubmbm9300"
+[1] "oubmbm9400"
+[1] "oubmbm9500"
+[1] "oubmbm9600"
+[1] "oubmbm9700"
+[1] "oubmbm9800"
+[1] "oubmbm9900"
+[1] "oubmbm10000"
+[1] "ououbm100"
+[1] "ououbm200"
+[1] "ououbm300"
+[1] "ououbm400"
+[1] "ououbm500"
+[1] "ououbm600"
+[1] "ououbm700"
+[1] "ououbm800"
+[1] "ououbm900"
+[1] "ououbm1000"
+[1] "ououbm1100"
+[1] "ououbm1200"
+[1] "ououbm1300"
+[1] "ououbm1400"
+[1] "ououbm1500"
+[1] "ououbm1600"
+[1] "ououbm1700"
+[1] "ououbm1800"
+[1] "ououbm1900"
+[1] "ououbm2000"
+[1] "ououbm2100"
+[1] "ououbm2200"
+[1] "ououbm2300"
+[1] "ououbm2400"
+[1] "ououbm2500"
+[1] "ououbm2600"
+[1] "ououbm2700"
+[1] "ououbm2800"
+[1] "ououbm2900"
+[1] "ououbm3000"
+[1] "ououbm3100"
+[1] "ououbm3200"
+[1] "ououbm3300"
+[1] "ououbm3400"
+[1] "ououbm3500"
+[1] "ououbm3600"
+[1] "ououbm3700"
+[1] "ououbm3800"
+[1] "ououbm3900"
+[1] "ououbm4000"
+[1] "ououbm4100"
+[1] "ououbm4200"
+[1] "ououbm4300"
+[1] "ououbm4400"
+[1] "ououbm4500"
+[1] "ououbm4600"
+[1] "ououbm4700"
+[1] "ououbm4800"
+[1] "ououbm4900"
+[1] "ououbm5000"
+[1] "ououbm5100"
+[1] "ououbm5200"
+[1] "ououbm5300"
+[1] "ououbm5400"
+[1] "ououbm5500"
+[1] "ououbm5600"
+[1] "ououbm5700"
+[1] "ououbm5800"
+[1] "ououbm5900"
+[1] "ououbm6000"
+[1] "ououbm6100"
+[1] "ououbm6200"
+[1] "ououbm6300"
+[1] "ououbm6400"
+[1] "ououbm6500"
+[1] "ououbm6600"
+[1] "ououbm6700"
+[1] "ououbm6800"
+[1] "ououbm6900"
+[1] "ououbm7000"
+[1] "ououbm7100"
+[1] "ououbm7200"
+[1] "ououbm7300"
+[1] "ououbm7400"
+[1] "ououbm7500"
+[1] "ououbm7600"
+[1] "ououbm7700"
+[1] "ououbm7800"
+[1] "ououbm7900"
+[1] "ououbm8000"
+[1] "ououbm8100"
+[1] "ououbm8200"
+[1] "ououbm8300"
+[1] "ououbm8400"
+[1] "ououbm8500"
+[1] "ououbm8600"
+[1] "ououbm8700"
+[1] "ououbm8800"
+[1] "ououbm8900"
+[1] "ououbm9000"
+[1] "ououbm9100"
+[1] "ououbm9200"
+[1] "ououbm9300"
+[1] "ououbm9400"
+[1] "ououbm9500"
+[1] "ououbm9600"
+[1] "ououbm9700"
+[1] "ououbm9800"
+[1] "ououbm9900"
+[1] "ououbm10000"
+[1] "oubmcir100"
+[1] "oubmcir200"
+[1] "oubmcir300"
+[1] "oubmcir400"
+[1] "oubmcir500"
+[1] "oubmcir600"
+[1] "oubmcir700"
+[1] "oubmcir800"
+[1] "oubmcir900"
+[1] "oubmcir1000"
+[1] "oubmcir1100"
+[1] "oubmcir1200"
+[1] "oubmcir1300"
+[1] "oubmcir1400"
+[1] "oubmcir1500"
+[1] "oubmcir1600"
+[1] "oubmcir1700"
+[1] "oubmcir1800"
+[1] "oubmcir1900"
+[1] "oubmcir2000"
+[1] "oubmcir2100"
+[1] "oubmcir2200"
+[1] "oubmcir2300"
+[1] "oubmcir2400"
+[1] "oubmcir2500"
+[1] "oubmcir2600"
+[1] "oubmcir2700"
+[1] "oubmcir2800"
+[1] "oubmcir2900"
+[1] "oubmcir3000"
+[1] "oubmcir3100"
+[1] "oubmcir3200"
+[1] "oubmcir3300"
+[1] "oubmcir3400"
+[1] "oubmcir3500"
+[1] "oubmcir3600"
+[1] "oubmcir3700"
+[1] "oubmcir3800"
+[1] "oubmcir3900"
+[1] "oubmcir4000"
+[1] "oubmcir4100"
+[1] "oubmcir4200"
+[1] "oubmcir4300"
+[1] "oubmcir4400"
+[1] "oubmcir4500"
+[1] "oubmcir4600"
+[1] "oubmcir4700"
+[1] "oubmcir4800"
+[1] "oubmcir4900"
+[1] "oubmcir5000"
+[1] "oubmcir5100"
+[1] "oubmcir5200"
+[1] "oubmcir5300"
+[1] "oubmcir5400"
+[1] "oubmcir5500"
+[1] "oubmcir5600"
+[1] "oubmcir5700"
+[1] "oubmcir5800"
+[1] "oubmcir5900"
+[1] "oubmcir6000"
+[1] "oubmcir6100"
+[1] "oubmcir6200"
+[1] "oubmcir6300"
+[1] "oubmcir6400"
+[1] "oubmcir6500"
+[1] "oubmcir6600"
+[1] "oubmcir6700"
+[1] "oubmcir6800"
+[1] "oubmcir6900"
+[1] "oubmcir7000"
+[1] "oubmcir7100"
+[1] "oubmcir7200"
+[1] "oubmcir7300"
+[1] "oubmcir7400"
+[1] "oubmcir7500"
+[1] "oubmcir7600"
+[1] "oubmcir7700"
+[1] "oubmcir7800"
+[1] "oubmcir7900"
+[1] "oubmcir8000"
+[1] "oubmcir8100"
+[1] "oubmcir8200"
+[1] "oubmcir8300"
+[1] "oubmcir8400"
+[1] "oubmcir8500"
+[1] "oubmcir8600"
+[1] "oubmcir8700"
+[1] "oubmcir8800"
+[1] "oubmcir8900"
+[1] "oubmcir9000"
+[1] "oubmcir9100"
+[1] "oubmcir9200"
+[1] "oubmcir9300"
+[1] "oubmcir9400"
+[1] "oubmcir9500"
+[1] "oubmcir9600"
+[1] "oubmcir9700"
+[1] "oubmcir9800"
+[1] "oubmcir9900"
+[1] "oubmcir10000"
+[1] "oubmcir100"
+[1] "oubmcir200"
+[1] "oubmcir300"
+[1] "oubmcir400"
+[1] "oubmcir500"
+[1] "oubmcir600"
+[1] "oubmcir700"
+[1] "oubmcir800"
+[1] "oubmcir900"
+[1] "oubmcir1000"
+[1] "oubmcir1100"
+[1] "oubmcir1200"
+[1] "oubmcir1300"
+[1] "oubmcir1400"
+[1] "oubmcir1500"
+[1] "oubmcir1600"
+[1] "oubmcir1700"
+[1] "oubmcir1800"
+[1] "oubmcir1900"
+[1] "oubmcir2000"
+[1] "oubmcir2100"
+[1] "oubmcir2200"
+[1] "oubmcir2300"
+[1] "oubmcir2400"
+[1] "oubmcir2500"
+[1] "oubmcir2600"
+[1] "oubmcir2700"
+[1] "oubmcir2800"
+[1] "oubmcir2900"
+[1] "oubmcir3000"
+[1] "oubmcir3100"
+[1] "oubmcir3200"
+[1] "oubmcir3300"
+[1] "oubmcir3400"
+[1] "oubmcir3500"
+[1] "oubmcir3600"
+[1] "oubmcir3700"
+[1] "oubmcir3800"
+[1] "oubmcir3900"
+[1] "oubmcir4000"
+[1] "oubmcir4100"
+[1] "oubmcir4200"
+[1] "oubmcir4300"
+[1] "oubmcir4400"
+[1] "oubmcir4500"
+[1] "oubmcir4600"
+[1] "oubmcir4700"
+[1] "oubmcir4800"
+[1] "oubmcir4900"
+[1] "oubmcir5000"
+[1] "oubmcir5100"
+[1] "oubmcir5200"
+[1] "oubmcir5300"
+[1] "oubmcir5400"
+[1] "oubmcir5500"
+[1] "oubmcir5600"
+[1] "oubmcir5700"
+[1] "oubmcir5800"
+[1] "oubmcir5900"
+[1] "oubmcir6000"
+[1] "oubmcir6100"
+[1] "oubmcir6200"
+[1] "oubmcir6300"
+[1] "oubmcir6400"
+[1] "oubmcir6500"
+[1] "oubmcir6600"
+[1] "oubmcir6700"
+[1] "oubmcir6800"
+[1] "oubmcir6900"
+[1] "oubmcir7000"
+[1] "oubmcir7100"
+[1] "oubmcir7200"
+[1] "oubmcir7300"
+[1] "oubmcir7400"
+[1] "oubmcir7500"
+[1] "oubmcir7600"
+[1] "oubmcir7700"
+[1] "oubmcir7800"
+[1] "oubmcir7900"
+[1] "oubmcir8000"
+[1] "oubmcir8100"
+[1] "oubmcir8200"
+[1] "oubmcir8300"
+[1] "oubmcir8400"
+[1] "oubmcir8500"
+[1] "oubmcir8600"
+[1] "oubmcir8700"
+[1] "oubmcir8800"
+[1] "oubmcir8900"
+[1] "oubmcir9000"
+[1] "oubmcir9100"
+[1] "oubmcir9200"
+[1] "oubmcir9300"
+[1] "oubmcir9400"
+[1] "oubmcir9500"
+[1] "oubmcir9600"
+[1] "oubmcir9700"
+[1] "oubmcir9800"
+[1] "oubmcir9900"
+[1] "oubmcir10000"
+Call: 
+postpr(target = raw.sum.stat, index = models, sumstat = full.sum.stat, 
+    tol = tol, method = "mnlogistic")
+Data:
+ postpr.out$values (8000 posterior samples)
+Models a priori:
+ oubmbm, oubmcir, ououbm, ououcir
+Models a posteriori:
+ oubmbm, oubmcir, ououbm, ououcir
+
+Proportion of accepted simulations (rejection):
+ oubmbm oubmcir  ououbm ououcir 
+ 0.2230  0.1762  0.2838  0.3170 
+
+Bayes factors:
+        oubmbm oubmcir ououbm ououcir
+oubmbm  1.0000  1.2652 0.7859  0.7035
+oubmcir 0.7904  1.0000 0.6211  0.5560
+ououbm  1.2724  1.6099 1.0000  0.8951
+ououcir 1.4215  1.7986 1.1172  1.0000
+
+
+Posterior model probabilities (mnlogistic):
+ oubmbm oubmcir  ououbm ououcir 
+ 0.4279  0.2856  0.0929  0.1937 
+
+Bayes factors:
+        oubmbm oubmcir ououbm ououcir
+oubmbm  1.0000  1.4983 4.6071  2.2095
+oubmcir 0.6674  1.0000 3.0749  1.4747
+ououbm  0.2171  0.3252 1.0000  0.4796
+ououcir 0.4526  0.6781 2.0851  1.0000
+
+$rejection
+$rejection$Prob
+ oubmbm oubmcir  ououbm ououcir 
+0.22300 0.17625 0.28375 0.31700 
+
+$rejection$BayesF
+           oubmbm   oubmcir    ououbm   ououcir
+oubmbm  1.0000000 1.2652482 0.7859031 0.7034700
+oubmcir 0.7903587 1.0000000 0.6211454 0.5559937
+ououbm  1.2724215 1.6099291 1.0000000 0.8951104
+ououcir 1.4215247 1.7985816 1.1171806 1.0000000
+
+
+$mnlogistic
+$mnlogistic$Prob
+    oubmbm    oubmcir     ououbm    ououcir 
+0.42788646 0.28558443 0.09287536 0.19365375 
+
+$mnlogistic$BayesF
+           oubmbm   oubmcir    ououbm   ououcir
+oubmbm  1.0000000 1.4982836 4.6071040 2.2095439
+oubmcir 0.6674304 1.0000000 3.0749212 1.4747168
+ououbm  0.2170561 0.3252116 1.0000000 0.4795950
+ououcir 0.4525821 0.6780963 2.0850927 1.0000000
+
+
+Warning message:
+In geiger::fitContinuous(tree, trait, model = model) :
+  Parameter estimates appear at bounds:
+	alpha
+> save.image("sanchez.Lasker_coral_log_thickness.RData")
+> 
+> ####distance
+> rm(list=ls())
+> 
+> tree<-read.tree("tree.phy")
+> tree<-reorder(tree,"postorder")
+> tree$root.edge<-0
+> 
+> dataset <- read.csv(file="trait.csv")
+> 
+> resptrait<-log(dataset$distance)
+> names(resptrait)<-tree$tip.label
+> predtrait1<-log(dataset$thickness)
+> names(predtrait1)<-tree$tip.label
+> predtrait2<-log(dataset$polyp)
+> names(predtrait2)<-tree$tip.label
+> 
+> #source("~/Dropbox/ChihPingWang/EmpiricalMaincode/modelcodeV2/empirical_analysis.r")
+> source("~/Dropbox/FCU/Teaching/Mentoring/2019Spring/ChihPingWang/EmpiricalMaincode/modelcodeV2/empirical_analysis.r")
+[1] "oubmbm100"
+[1] "oubmbm200"
+[1] "oubmbm300"
+[1] "oubmbm400"
+[1] "oubmbm500"
+[1] "oubmbm600"
+[1] "oubmbm700"
+[1] "oubmbm800"
+[1] "oubmbm900"
+[1] "oubmbm1000"
+[1] "oubmbm1100"
+[1] "oubmbm1200"
+[1] "oubmbm1300"
+[1] "oubmbm1400"
+[1] "oubmbm1500"
+[1] "oubmbm1600"
+[1] "oubmbm1700"
+[1] "oubmbm1800"
+[1] "oubmbm1900"
+[1] "oubmbm2000"
+[1] "oubmbm2100"
+[1] "oubmbm2200"
+[1] "oubmbm2300"
+[1] "oubmbm2400"
+[1] "oubmbm2500"
+[1] "oubmbm2600"
+[1] "oubmbm2700"
+[1] "oubmbm2800"
+[1] "oubmbm2900"
+[1] "oubmbm3000"
+[1] "oubmbm3100"
+[1] "oubmbm3200"
+[1] "oubmbm3300"
+[1] "oubmbm3400"
+[1] "oubmbm3500"
+[1] "oubmbm3600"
+[1] "oubmbm3700"
+[1] "oubmbm3800"
+[1] "oubmbm3900"
+[1] "oubmbm4000"
+[1] "oubmbm4100"
+[1] "oubmbm4200"
+[1] "oubmbm4300"
+[1] "oubmbm4400"
+[1] "oubmbm4500"
+[1] "oubmbm4600"
+[1] "oubmbm4700"
+[1] "oubmbm4800"
+[1] "oubmbm4900"
+[1] "oubmbm5000"
+[1] "oubmbm5100"
+[1] "oubmbm5200"
+[1] "oubmbm5300"
+[1] "oubmbm5400"
+[1] "oubmbm5500"
+[1] "oubmbm5600"
+[1] "oubmbm5700"
+[1] "oubmbm5800"
+[1] "oubmbm5900"
+[1] "oubmbm6000"
